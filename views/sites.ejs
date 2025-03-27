@@ -1,0 +1,52 @@
+<html lang="en" data-theme="retro">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>National Historic Sites</title>
+        <link rel="stylesheet" href="/css/main.css">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@1.4.0/dist/full.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1 class="text-3xl font-bold text-primary mb-4">Sites <span class="text-base text-primary">(<%= sites.length %>)</span></h1>
+        <% sites.forEach(function(site) { %>
+            <div class="site mb-6">
+                <h1 class="text-3xl font-bold text-primary mb-4"><%= site.name %></h1>
+                <p class="text-lg font-semibold mb-6">Below, you will find detailed information about the site: <%= site.name %></p>
+            </div>
+            <div class="container">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <img src="<%= site.image %>" alt="<%= site.name %>" class="img-fluid rounded-lg shadow-lg">
+                    </div>
+                    <div>
+                        <p><strong>Site Name:</strong> <%= site.name %></p>
+                        <p><strong>Date:</strong> <%= site.date %> (<%= site.dateType %>)</p>
+                        <p><strong>Location:</strong> <%= site.location %>, <%= site.provinceOrTerritoryObj.name %></p>
+                        <p><strong>Region:</strong> <%= site.region %></p>
+                        <p><strong>Geolocation:</strong> <%= site.latitude %>, <%= site.longitude %></p>
+                        <p><strong>Designated:</strong> <%= site.designated %></p>
+                        <p><strong>Is WorldHeritageSite:</strong> <%= site.worldHeritageSite ? 'Yes' : 'No' %></p>
+                        <a href="/editSite/<%= site.siteId %>" class="btn btn-success mt-4">Edit</a>
+                        <blockquote id="quote" class="bg-gray-200 p-4 rounded-lg mt-4 shadow-lg text-center">
+                            <p class="text-xl font-semibold italic text-primary">"Loading quote..."</p>
+                            <footer class="text-sm text-gray-600">- Unknown</footer>
+                        </blockquote>
+                        <a href="#" onclick="history.back(); return false;" class="btn btn-secondary mt-4">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                fetch('https://api.quotable.io/random')
+                    .then(response => response.json())
+                    .then(data => {
+                        const quoteElement = document.getElementById('quote');
+                        quoteElement.innerHTML = `<p class="text-xl font-semibold italic text-primary">"${data.content}"</p><footer class="text-sm text-gray-600">- ${data.author}</footer>`;
+                    })
+                    .catch(error => console.error('Error fetching quote:', error));
+            });
+        </script>
+    </body>
+</html>

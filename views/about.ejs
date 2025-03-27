@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="retro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@1.4.0/dist/full.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="flex items-center justify-between p-4 bg-base-100">
+        <a class="<%= (page == '/about') ? 'active' : '' %>" href="/about">
+            <div class="avatar">
+                <div class="mask mask-squircle w-12">
+                    <img src="/img/flag.jpg" alt="Flag" />
+                </div>
+            </div>
+            <span class="text-lg font-semibold">National Historic Sites</span>
+        </a>
+        <div class="space-x-4">
+            <a href="/about" class="btn <%= (page == '/about') ? 'btn-primary' : 'btn-secondary' %>">About</a>
+            <details class="dropdown">
+                <summary class="btn btn-secondary">Region</summary>
+                <ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="/sites?region=Atlantic Region" class="btn btn-accent">Atlantic Region</a></li>
+                    <li><a href="/sites?region=Central Canada" class="btn btn-accent">Central Canada</a></li>
+                    <li><a href="/sites?region=Prairie Provinces" class="btn btn-accent">Prairie Provinces</a></li>
+                    <li><a href="/sites?region=West Coast" class="btn btn-accent">West Coast</a></li>
+                    <li><a href="/sites?region=North" class="btn btn-accent">North</a></li>
+                </ul>
+            </details>
+        </div>
+        <%- include('partials/navbar', {page: '/about'}) %>
+    </nav>
+
+    <section class="hero bg-primary text-white p-12 rounded-lg">
+        <div class="hero-content text-center">
+            <h1 class="text-4xl font-bold">About</h1>
+            <p class="mt-4">All about me</p>
+        </div>
+    </section>
+
+    <div class="container mx-auto mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="flex justify-center">
+                <img src="/img/selfie.jpg" alt="Your Image" class="rounded-lg shadow-lg w-full h-auto max-w-sm">
+            </div>
+
+            <div class="flex flex-col justify-center">
+                <h2 class="text-2xl font-semibold">Hello! I am Luana Emiko Silva Nakazo!</h2>
+                <p class="mt-4">I'm a 27-year-old Brazilian mom, currently studying Computer Programming at Seneca College.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="retro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Historic Sites</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@1.4.0/dist/full.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="flex items-center justify-between p-4 bg-base-100">
+        <div class="flex items-center space-x-4">
+            <div class="avatar">
+                <div class="mask mask-squircle w-12">
+                    <img src="/img/flag.jpg" alt="Flag" />
+                </div>
+            </div>
+            <button class="btn btn-link text-lg font-semibold">National Historic Sites</button>
+        </div>
+        <div class="space-x-4">
+            <a href="/about" class="btn btn-primary">About</a>
+            <details class="dropdown">
+                <summary class="btn btn-secondary">Region</summary>
+                <ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="/sites?region=Atlantic Region" class="btn btn-accent">Atlantic Region</a></li>
+                    <li><a href="/sites?region=Central Canada" class="btn btn-accent">Central Canada</a></li>
+                    <li><a href="/sites?region=Prairie Provinces" class="btn btn-accent">Prairie Provinces</a></li>
+                    <li><a href="/sites?region=West Coast" class="btn btn-accent">West Coast</a></li>
+                    <li><a href="/sites?region=North" class="btn btn-accent">North</a></li>
+                </ul>
+            </details>
+        </div>
+    </nav>
+
+    <section class="hero bg-primary text-white p-12 rounded-lg">
+        <div class="hero-content text-center">
+            <h1 class="text-4xl font-bold">Discover Canada's National Historic Sites</h1>
+            <p class="mt-4">Experience Canada's history through its most iconic landmarks.</p>
+            <a href="/sites" class="btn btn-secondary mt-6">View Sites</a>
+        </div>
+    </section>
+
+    <div class="container mx-auto mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="card bg-base-100 shadow-lg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Scene_taken_at_Camp_Hughes_%28then_Camp_Sewell%29_Manitoba%2C_2_weeks_previous_to_declaration_of_war%2C_1914_%28II%29.jpg" alt="Camp Hughes" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="card-body">
+                    <h2 class="text-2xl font-semibold">Camp Hughes</h2>
+                    <p>More than 38,000 Canadians trained at this camp during the First World War, many of whom fought at the Battle of Vimy Ridge in April 1917.</p>
+                    <p><strong>Date:</strong> 1909 (established)</p>
+                    <p><strong>Location:</strong> North Cypress, MB</p>
+                    <a href="/sites/MB005" class="btn btn-primary mt-4">More Info</a>
+                </div>
+            </div>
+            <div class="card bg-base-100 shadow-lg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Canadian_Pacific_Railway_Station_Winnipeg.jpg" alt="Canadian Pacific Railway Station" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="card-body">
+                    <h2 class="text-2xl font-semibold">Canadian Pacific Railway Station</h2>
+                    <p>A four-storey former railway station; its landmark Beaux-Arts design and elaborate Tyndall stone detailing reflect the early 20th-century growth of Winnipeg.</p>
+                    <p><strong>Date:</strong> 1906 (completed)</p>
+                    <p><strong>Location:</strong> Winnipeg, MB</p>
+                    <a href="/sites/MB006" class="btn btn-primary mt-4">More Info</a>
+                </div>
+            </div>
+            <div class="card bg-base-100 shadow-lg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/1_Chipman_Hill.JPG/360px-1_Chipman_Hill.JPG" alt="1 Chipman Hill" class="w-full h-48 object-cover rounded-t-lg">
+                <div class="card-body">
+                    <h2 class="text-2xl font-semibold">1 Chipman Hill</h2>
+                    <p>Symbolic of upper-middle-class urban housing in Saint John during the mid-19th century, featuring decorative trompe-l'œil murals.</p>
+                    <p><strong>Date:</strong> 1854 (completed)</p>
+                    <p><strong>Location:</strong> Saint John, NB</p>
+                    <a href="/sites/NB001" class="btn btn-primary mt-4">More Info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

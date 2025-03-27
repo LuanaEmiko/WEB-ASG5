@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Site</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('partials/navbar', { page: '/addSite' }) %>
+    
+    <section class="hero">
+        <div class="hero-content text-center">
+            <h1 class="text-4xl font-bold">Add Site</h1>
+        </div>
+    </section>
+    
+    <div class="container mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+        <form action="/addSite" method="POST" class="space-y-4">
+            <label>Site ID:
+                <input type="text" name="siteId" required class="input input-bordered w-full">
+            </label>
+            <label>Site Name:
+                <input type="text" name="site" required class="input input-bordered w-full">
+            </label>
+            <label>Image URL:
+                <input type="url" name="image" required class="input input-bordered w-full">
+            </label>
+            <label>Date:
+                <input type="number" name="date" required class="input input-bordered w-full">
+            </label>
+            <label>Date Type:
+                <input type="text" name="dateType" required class="input input-bordered w-full">
+            </label>
+            <label>Designated:
+                <input type="number" name="designated" required class="input input-bordered w-full">
+            </label>
+            <label>Location:
+                <input type="text" name="location" required class="input input-bordered w-full">
+            </label>
+            <label>Province or Territory:
+                <select name="provinceOrTerritoryCode" required class="select select-bordered w-full">
+                    <% provincesAndTerritories.forEach(provinceOrTerritory => { %>
+                        <option value="<%= provinceOrTerritory.code %>">
+                            <%= provinceOrTerritory.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </label>
+            <label>Description:
+                <textarea name="description" class="textarea textarea-bordered w-full"></textarea>
+            </label>
+            <label>Latitude:
+                <input type="number" name="latitude" step="0.00000001" required class="input input-bordered w-full">
+            </label>
+            <label>Longitude:
+                <input type="number" name="longitude" step="0.00000001" required class="input input-bordered w-full">
+            </label>
+            <button type="submit" class="btn btn-primary w-full">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

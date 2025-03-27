@@ -1,0 +1,16 @@
+<nav class="flex items-center justify-between p-4 bg-base-100">
+    <a class="<%= (page == '/home') ? 'active' : '' %>" href="/home">
+        <div class="avatar">
+            <div class="mask mask-squircle w-12">
+                <img src="/img/flag.jpg" alt="Flag" />
+            </div>
+        </div>
+        <span class="text-lg font-semibold">National Historic Sites</span>
+    </a>
+    
+    <ul class="nav">
+        <li><a class="<%= (page == '/sites') ? 'active' : '' %>" href="/sites">View Site Collection</a></li>
+        <li><a class="<%= (page == '/about') ? 'active' : '' %>" href="/about">About</a></li>
+        <li><a class="<%= (page == '/addSite') ? 'active' : '' %>" href="/addSite">Add to Collection</a></li>
+    </ul>
+</nav>
