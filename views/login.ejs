@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="retro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - National Historic Sites</title>
+  <link rel="stylesheet" href="/css/main.css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.4.0/dist/full.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="flex items-center justify-between p-4 bg-base-100">
+    <div class="flex items-center space-x-4">
+      <div class="avatar">
+        <div class="mask mask-squircle w-12">
+          <img src="/img/flag.jpg" alt="Flag" />
+        </div>
+      </div>
+      <button class="btn btn-link text-lg font-semibold">
+        <a href="/" class="text-inherit">National Historic Sites</a>
+      </button>
+      
+    </div>
+    <div class="flex items-center space-x-4">
+      <a href="/sites" class="btn btn-primary">View All Sites</a>
+      <details class="dropdown dropdown-end">
+        <summary class="btn btn-accent">Account</summary>
+        <ul class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-40">
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+        </ul>
+      </details>
+    </div>
+  </nav>
+
+  <div class="hero bg-base-200 p-10 rounded-box mb-5">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-4xl font-bold mb-2">Log In</h1>
+        <p class="py-2 text-lg">Please provide your credentials below</p>
+      </div>
+    </div>
+  </div>
+
+  <form method="POST" action="/login" class="w-full max-w-md mx-auto flex flex-col gap-4">
+    <label class="font-semibold text-lg">User Name</label>
+    <input
+      type="text"
+      name="userName"
+      placeholder="Enter your user name"
+      required
+      class="input input-bordered"
+      value="<%= typeof userName !== 'undefined' ? userName : '' %>"
+    />
+
+    <label class="font-semibold text-lg">Password</label>
+    <input
+      type="password"
+      name="password"
+      placeholder="Enter your password"
+      required
+      class="input input-bordered"
+    />
+
+    <button type="submit" class="btn btn-primary mt-4">Login</button>
+
+    <% if (typeof errorMessage !== 'undefined') { %>
+      <div class="alert alert-error mt-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span><%= errorMessage %></span>
+      </div>
+    <% } %>
+  </form>
+</body>
+</html>

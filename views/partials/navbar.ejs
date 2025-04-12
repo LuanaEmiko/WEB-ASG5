@@ -1,16 +1,39 @@
 <nav class="flex items-center justify-between p-4 bg-base-100">
     <a class="<%= (page == '/home') ? 'active' : '' %>" href="/home">
-        <div class="avatar">
-            <div class="mask mask-squircle w-12">
-                <img src="/img/flag.jpg" alt="Flag" />
-            </div>
+      <div class="avatar">
+        <div class="mask mask-squircle w-12">
+          <img src="/img/flag.jpg" alt="Flag" />
         </div>
-        <span class="text-lg font-semibold">National Historic Sites</span>
+      </div>
+      <span class="text-lg font-semibold">National Historic Sites</span>
     </a>
-    
-    <ul class="nav">
-        <li><a class="<%= (page == '/sites') ? 'active' : '' %>" href="/sites">View Site Collection</a></li>
-        <li><a class="<%= (page == '/about') ? 'active' : '' %>" href="/about">About</a></li>
-        <li><a class="<%= (page == '/addSite') ? 'active' : '' %>" href="/addSite">Add to Collection</a></li>
+  
+    <ul class="flex space-x-4">
+      <li><a class="<%= (page == '/sites') ? 'active' : '' %>" href="/sites">View Site Collection</a></li>
+      <li><a class="<%= (page == '/about') ? 'active' : '' %>" href="/about">About</a></li>
+  
+      <% if (session && session.user) { %>
+        <li>
+          <details class="dropdown">
+            <summary class="cursor-pointer">Account: <%= session.user.userName %></summary>
+            <ul class="dropdown-content p-2 bg-base-200 rounded-box">
+              <li><a class="<%= (page == '/addSite') ? 'active' : '' %>" href="/addSite">Add Site</a></li>
+              <li><a class="<%= (page == '/userHistory') ? 'active' : '' %>" href="/userHistory">User History</a></li>
+              <li><a href="/logout">Log Out</a></li>
+            </ul>
+          </details>
+        </li>
+      <% } else { %>
+        <li>
+          <details class="dropdown">
+            <summary class="cursor-pointer">Account</summary>
+            <ul class="dropdown-content p-2 bg-base-200 rounded-box">
+              <li><a class="<%= (page == '/login') ? 'active' : '' %>" href="/login">Login</a></li>
+              <li><a class="<%= (page == '/register') ? 'active' : '' %>" href="/register">Register</a></li>
+            </ul>
+          </details>
+        </li>
+      <% } %>
     </ul>
-</nav>
+  </nav>
+  

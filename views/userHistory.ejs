@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="retro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User History</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+  <%- include('partials/navbar', { page: '/userHistory' }) %>
+
+  <div class="hero bg-base-200 text-center p-10 rounded-box mb-5">
+    <h1 class="text-4xl font-bold">Welcome, <%= session.user.userName %>!</h1>
+    <p class="py-2">Email: <strong><%= session.user.email %></strong></p>
+  </div>
+
+  <div class="overflow-x-auto w-full max-w-3xl mx-auto mt-6">
+    <table class="table table-zebra w-full">
+      <thead>
+        <tr>
+          <th>Login Date/Time</th>
+          <th>Client Information</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% session.user.loginHistory.forEach(entry => { %>
+          <tr>
+            <td><%= entry.dateTime %></td>
+            <td><%= entry.userAgent %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

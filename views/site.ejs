@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="retro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= site.site %></title>
+  <link rel="stylesheet" href="/css/main.css">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async ()=> {
+        let res = await fetch("http://quotable.io/random");
+        let data = await res.json();
+
+        document.getElementById("quote").innerHTML = `"${data.content}"<br />- <em>${data.author}</em>`;
+    });
+  </script>
+</head>
+
+<body tabindex="-1">
+  <%- include('partials/navbar', { page: '/site' }) %>
+
+  <div class="container mx-auto p-4">
+    <div class="hero bg-base-200 rounded-lg p-6">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold"><%= site.site %></h1>
+          <p class="py-6">Below, you will find detailed information about the site: <%= site.site %></p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <img class="w-full rounded-lg" src="<%= site.image %>" alt="<%= site.site %>">
+        <br><br>
+      </div>
+      <div class="prose">
+        <p>
+          <span class="font-bold">Site Name: </span> <%= site.site %> <br>
+          <span class="font-bold">Description: </span> <%= site.description %> <br>
+          <span class="font-bold">Date: </span> <%= site.date %> (<%= site.dateType %>) <br>
+          <span class="font-bold">Location: </span> <%= site.location %> <br>
+          <span class="font-bold">Region: </span> <%= site.ProvinceOrTerritory.region %> <br>
+          <span class="font-bold">Geolocation: </span> <%= site.latitude %>, <%= site.longitude %> <br>
+          <span class="font-bold">Designated: </span> <%= site.designated %> <br>
+          <span class="font-bold">Province or Territory: </span> 
+          <a class="btn btn-outline btn-sm" href="/sites?provinceOrTerritory=<%= site.ProvinceOrTerritory.name %>">
+            <%= site.ProvinceOrTerritory.name %>
+          </a>
+          <br><br>
+
+          <span id="quote"></span>
+          <br><br>
+
+          <div class="flex flex-col gap-2 mt-6 w-full sm:w-1/2 mx-auto">
+            <a class="btn btn-primary btn-sm" href="#" onclick="history.back(); return false;">RETURN</a>
+          
+            <% if (session.user) { %>
+              <a class="btn btn-success btn-sm" href="/editSite/<%= site.siteId %>">EDIT</a>
+              <a class="btn btn-error btn-sm" href="/deleteSite/<%= site.siteId %>" onclick="return confirm('Are you sure you want to delete this site?');">Delete Site</a>
+            <% } %>
+          </div>
+          
+          
+
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

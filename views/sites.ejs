@@ -1,52 +1,118 @@
+<!DOCTYPE html>
 <html lang="en" data-theme="retro">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>National Historic Sites</title>
-        <link rel="stylesheet" href="/css/main.css">
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/daisyui@1.4.0/dist/full.css" rel="stylesheet">
-    </head>
-    <body>
-        <h1 class="text-3xl font-bold text-primary mb-4">Sites <span class="text-base text-primary">(<%= sites.length %>)</span></h1>
-        <% sites.forEach(function(site) { %>
-            <div class="site mb-6">
-                <h1 class="text-3xl font-bold text-primary mb-4"><%= site.name %></h1>
-                <p class="text-lg font-semibold mb-6">Below, you will find detailed information about the site: <%= site.name %></p>
-            </div>
-            <div class="container">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <img src="<%= site.image %>" alt="<%= site.name %>" class="img-fluid rounded-lg shadow-lg">
-                    </div>
-                    <div>
-                        <p><strong>Site Name:</strong> <%= site.name %></p>
-                        <p><strong>Date:</strong> <%= site.date %> (<%= site.dateType %>)</p>
-                        <p><strong>Location:</strong> <%= site.location %>, <%= site.provinceOrTerritoryObj.name %></p>
-                        <p><strong>Region:</strong> <%= site.region %></p>
-                        <p><strong>Geolocation:</strong> <%= site.latitude %>, <%= site.longitude %></p>
-                        <p><strong>Designated:</strong> <%= site.designated %></p>
-                        <p><strong>Is WorldHeritageSite:</strong> <%= site.worldHeritageSite ? 'Yes' : 'No' %></p>
-                        <a href="/editSite/<%= site.siteId %>" class="btn btn-success mt-4">Edit</a>
-                        <blockquote id="quote" class="bg-gray-200 p-4 rounded-lg mt-4 shadow-lg text-center">
-                            <p class="text-xl font-semibold italic text-primary">"Loading quote..."</p>
-                            <footer class="text-sm text-gray-600">- Unknown</footer>
-                        </blockquote>
-                        <a href="#" onclick="history.back(); return false;" class="btn btn-secondary mt-4">Go Back</a>
-                    </div>
-                </div>
-            </div>
-        <% }); %>
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                fetch('https://api.quotable.io/random')
-                    .then(response => response.json())
-                    .then(data => {
-                        const quoteElement = document.getElementById('quote');
-                        quoteElement.innerHTML = `<p class="text-xl font-semibold italic text-primary">"${data.content}"</p><footer class="text-sm text-gray-600">- ${data.author}</footer>`;
-                    })
-                    .catch(error => console.error('Error fetching quote:', error));
-            });
-        </script>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>National Historic Sites</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body tabindex="-1">
+  <nav class="flex items-center justify-between p-4 bg-base-100">
+    <a href="/" class="flex items-center space-x-2">
+      <div class="avatar">
+        <div class="mask mask-squircle w-12">
+          <img src="/img/flag.jpg" alt="Flag" />
+        </div>
+      </div>
+      <button class="btn btn-link text-lg font-semibold">
+        <a href="/" class="text-inherit">National Historic Sites</a>
+      </button>
+    </a>
+  
+    <div class="flex items-center space-x-4">
+      <a href="/sites" class="btn btn-primary btn-disabled">View All Sites</a>
+      <a href="/about" class="btn btn-secondary">About</a>
+  
+      <details class="dropdown dropdown-end">
+        <summary class="btn btn-accent">Account</summary>
+        <ul class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-40">
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+        </ul>
+      </details>
+    </div>
+  </nav>
+  
+
+  <br><br>
+
+  <div class="hero bg-base-200 rounded-lg p-6">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold flex items-center justify-center gap-2">
+            Site Collection
+            <span class="bg-gray-300 hover:bg-gray-400 text-sm px-2 py-1 rounded-md text-black cursor-default transition">
+              (<%= sites.length %>)
+            </span>
+          </h1>
+          
+          
+        <p class="py-6">Browse all National Historic Sites. Click buttons to filter sites by region, e.g.,
+          <a href="/sites?region=Atlantic region" class="btn btn-primary mt-2 btn-xs">Atlantic Region</a>
+          <a href="/sites?region=Central Canada" class="btn btn-primary mt-2 btn-xs">Central Canada</a>
+          <a href="/sites?region=Prairie Provinces" class="btn btn-primary mt-2 btn-xs">Prairie Provinces</a>
+          <br> or by province or territory, e.g.,
+          <a href="/sites?provinceOrTerritory=Ontario" class="btn btn-primary mt-2 btn-xs">Ontario</a>
+          <a href="/sites?provinceOrTerritory=Quebec" class="btn btn-primary mt-2 btn-xs">Quebec</a>
+          <a href="/sites?provinceOrTerritory=Yukon" class="btn btn-primary mt-2 btn-xs">Yukon</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <% if (sites && sites.length > 0) { %>
+    <div class="overflow-x-auto">
+      <table class="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Date & Designation</th>
+            <th>Location</th>
+            <th>Region</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% sites.forEach(site => { %>
+            <tr>
+              <td>
+                <img src="<%= site.image %>" alt="<%= site.site %>" class="h-24 rounded-lg">
+              </td>
+              <td><strong><%= site.site %></strong></td>
+              <td>
+                <strong>Date:</strong> <%= site.date %> (<%= site.dateType %>) <br>
+                <strong>Designated:</strong> <%= site.designated %>
+              </td>
+              <td>
+                <%= site.location %>,
+                <a href="/sites?provinceOrTerritory=<%= site.ProvinceOrTerritory.name %>" class="btn btn-primary btn-xs">
+                  <%= site.ProvinceOrTerritory.name %>
+                </a>
+              </td>
+              <td>
+                <a href="/sites?region=<%= site.ProvinceOrTerritory.region %>" class="btn btn-secondary btn-xs">
+                  <%= site.ProvinceOrTerritory.region %>
+                </a>
+              </td>
+              <td>
+                <a href="/sites/<%= site.siteId %>" class="btn btn-accent btn-xs">Details</a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <div class="hero bg-red-200 rounded-lg p-6">
+      <h1 class="text-3xl font-bold text-center text-red-600">No Sites Found</h1>
+    </div>
+  <% } %>
+</body>
 </html>
+
+
+
+
